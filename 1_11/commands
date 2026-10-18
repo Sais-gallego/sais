@@ -1,0 +1,2 @@
+docker build -t spring-example .
+docker run -p 8080:8080 spring-example

@@ -1,0 +1,53 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: ${{ matrix.script }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        script:
+          - test_1_07_curler.sh
+          - test_1_08_web_server.sh
+          - test_1_09_bind_mount_log.sh
+          - test_1_10_web_server_port.sh
+          - test_1_11_spring_example.sh
+          - test_1_12_frontend_port.sh
+          - test_1_13_backend_ping.sh
+          - test_1_14_frontend_backend_integration.sh
+          - test_1_15_or_1_16.sh
+          - test_2_01_writing_to_log.sh
+          - test_2_02_simple_server_with_browser.sh
+          - test_2_03_project_compose.sh
+          - test_2_04_project_redis.sh
+          - test_2_06_project_postgres.sh
+          - test_2_07_project_bind_mount.sh
+          - test_2_08_project_nginx_basic.sh
+          - test_2_09_project_nginx.sh
+          - test_2_10_project_closed_ports.sh
+          - test_3_03_builder_script.sh
+          - test_3_04_dockerized_builder.sh
+          - test_3_05_nonroot_dockerfiles.sh
+          - test_3_06_optimized_images.sh
+          - test_3_07_prebuilt_images.sh
+          - test_3_08_multistage_frontend.sh
+          - test_3_09_multistage_backend.sh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      - name: Run ${{ matrix.script }}
+        run: bash tests/${{ matrix.script }}

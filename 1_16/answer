@@ -1,0 +1,3 @@
+https://devops-with-docker.mooc.fi/
+
+The containerized web application was built using a Dockerfile, pushed to Docker Hub, and deployed to a cloud container service where the server is running and accessible via HTTPS.
